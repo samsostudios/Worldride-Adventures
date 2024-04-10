@@ -1,4 +1,5 @@
 import { mobileNav } from '$components/mobileNav';
+import { bannerMotion, heroMotion } from '$motion/home';
 import { enviornmentCheck } from '$utils/enviornmentCheck';
 import { getDevice } from '$utils/getDevice';
 import { smoothScroll } from '$utils/smoothScroll';
@@ -16,4 +17,9 @@ window.Webflow.push(() => {
   if (device !== 'desktop') {
     mobileNav();
   }
+
+  // ----------
+  // Motion
+  heroMotion();
+  bannerMotion();
 });
