@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@finsweet/ts-utils": "^0.37.3",
+    "@studio-freight/lenis": "^1.0.42",
     "gsap": "^3.11.4"
   },
   "devDependencies": {
