@@ -1,5 +1,13 @@
 import { mobileNav } from '$components/mobileNav';
-import { bannerMotion, bookMotion, heroMotion } from '$motion/home';
+import {
+  aboutMotion,
+  bannerMotion,
+  bookMotion,
+  heroMotion,
+  impactMotion,
+  interactiveMotion,
+  storeMotion,
+} from '$motion/home';
 import { enviornmentCheck } from '$utils/enviornmentCheck';
 import { getDevice } from '$utils/getDevice';
 import { smoothScroll } from '$utils/smoothScroll';
@@ -23,4 +31,8 @@ window.Webflow.push(() => {
   heroMotion();
   bannerMotion();
   bookMotion();
+  interactiveMotion();
+  storeMotion();
+  aboutMotion();
+  impactMotion();
 });
