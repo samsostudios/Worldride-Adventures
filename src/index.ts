@@ -26,13 +26,24 @@ window.Webflow.push(() => {
     mobileNav();
   }
 
-  // ----------
-  // Motion
-  heroMotion();
-  bannerMotion();
-  bookMotion();
-  interactiveMotion();
-  storeMotion();
-  aboutMotion();
-  impactMotion();
+  const windowLocation = window.location.href;
+
+  if (windowLocation === '/') {
+    // ----------
+    // Motion
+    heroMotion();
+    bannerMotion();
+    bookMotion();
+    interactiveMotion();
+    storeMotion();
+    aboutMotion();
+    impactMotion();
+  } else if (windowLocation.includes('checkout')) {
+    const lenis = smoothScroll();
+
+    lenis.stop();
+    setTimeout(() => {
+      lenis.start();
+    }, 200);
+  }
 });

@@ -21,4 +21,6 @@ export const smoothScroll = () => {
     ScrollTrigger.update();
   });
   gsap.ticker.lagSmoothing(0);
+
+  return lenis;
 };
