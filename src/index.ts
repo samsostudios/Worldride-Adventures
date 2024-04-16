@@ -26,9 +26,11 @@ window.Webflow.push(() => {
     mobileNav();
   }
 
-  const windowLocation = window.location.href;
+  const windowLocation = window.location.pathname;
+  console.log(windowLocation);
 
   if (windowLocation === '/') {
+    console.log('INDEX');
     // ----------
     // Motion
     heroMotion();
