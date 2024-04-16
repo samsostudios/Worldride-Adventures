@@ -14,7 +14,7 @@ import { smoothScroll } from '$utils/smoothScroll';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  console.log('/// mainJS ///');
+  console.log('/// Worldride Adventures ///');
 
   const isEditor = enviornmentCheck();
   if (!isEditor) {
@@ -27,10 +27,8 @@ window.Webflow.push(() => {
   }
 
   const windowLocation = window.location.pathname;
-  console.log(windowLocation);
 
   if (windowLocation === '/') {
-    console.log('INDEX');
     // ----------
     // Motion
     heroMotion();
@@ -40,7 +38,7 @@ window.Webflow.push(() => {
     storeMotion();
     aboutMotion();
     impactMotion();
-  } else if (windowLocation.includes('checkout')) {
+  } else if (windowLocation.includes('checkout') || windowLocation.includes('confirmation')) {
     const lenis = smoothScroll();
 
     lenis.stop();
