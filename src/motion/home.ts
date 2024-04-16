@@ -82,6 +82,7 @@ export const bookMotion = () => {
 
 export const interactiveMotion = () => {
   const interactiveComponent = document.querySelector('.section_interactive') as HTMLElement;
+  const interactiveButton = interactiveComponent.querySelector('a');
 
   const st = gsap.timeline({
     scrollTrigger: {
@@ -93,6 +94,18 @@ export const interactiveMotion = () => {
     },
   });
   st.from(interactiveComponent, { duration: 1, y: '2rem', opacity: 0, ease: 'power4.out' });
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      setTimeout(() => {
+        tl.restart();
+      }, 2000);
+    },
+  });
+  tl.to(interactiveButton, { duration: 0.5, scale: 1.1, ease: 'power4.inOut' });
+  tl.to(interactiveButton, { duration: 0.5, scale: 1, ease: 'power4.inOut' });
+  tl.to(interactiveButton, { duration: 0.5, scale: 1.1, ease: 'power4.inOut' });
+  tl.to(interactiveButton, { duration: 0.5, scale: 1, ease: 'power4.inOut' });
 };
 
 export const storeMotion = () => {
