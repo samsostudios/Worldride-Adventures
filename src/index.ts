@@ -39,11 +39,10 @@ window.Webflow.push(() => {
     aboutMotion();
     impactMotion();
   } else if (windowLocation.includes('checkout') || windowLocation.includes('confirmation')) {
-    const lenis = smoothScroll();
-
-    lenis.stop();
-    setTimeout(() => {
-      lenis.start();
-    }, 200);
+    // const lenis = smoothScroll();
+    // lenis.stop();
+    // setTimeout(() => {
+    //   lenis.start();
+    // }, 200);
   }
 });
