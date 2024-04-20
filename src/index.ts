@@ -1,3 +1,4 @@
+import { backpackComponent } from '$components/backpacks';
 import { mobileNav } from '$components/mobileNav';
 import {
   aboutMotion,
@@ -35,6 +36,7 @@ window.Webflow.push(() => {
     bannerMotion();
     bookMotion();
     interactiveMotion();
+    backpackComponent();
     storeMotion();
     aboutMotion();
     impactMotion();

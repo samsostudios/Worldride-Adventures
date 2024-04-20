@@ -238,4 +238,47 @@ export const impactMotion = () => {
       ease: 'none',
     }
   );
+
+  const impactSlider = document.querySelector('.impact-media_list') as HTMLElement;
+  const sliderWidth = impactSlider.getBoundingClientRect();
+
+  init();
+  console.log('here', impactSlider, window.innerWidth, sliderWidth);
+
+  window.addEventListener('resize', () => {
+    init();
+  });
+
+  function init() {
+    const impactSlider = document.querySelector('.impact-media_list') as HTMLElement;
+    const iChildren = [...impactSlider.children];
+
+    let trackWidth = 0;
+    iChildren.forEach((e) => {
+      trackWidth += e.clientWidth;
+    });
+
+    const dur = 5;
+    // const tl = gsap.timeline({ repeat: -1 });
+    // tl.to(impactSlider, { duration: dur, left: -trackWidth, ease: 'linear' });
+    // tl.to(impactSlider, { duration: dur, left: 0, ease: 'linear' });
+
+    const tl = gsap.to(impactSlider, {
+      duration: dur,
+      x: -trackWidth,
+      onReverseComplete() {
+        this.totalTime(dur * 100);
+      },
+      repeat: -1,
+      ease: 'none',
+    });
+
+    const clamp = gsap.utils.clamp(-5, 5);
+    ScrollTrigger.create({
+      onUpdate: (self) => {
+        tl.timeScale(clamp(self.getVelocity() / 100));
+        gsap.to(tl, { timeScale: 1, duration: 1, overwrite: true, ease: 'none' });
+      },
+    });
+  }
 };

@@ -4215,6 +4215,99 @@
   var gsapWithCSS = gsap.registerPlugin(CSSPlugin) || gsap;
   var TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
+  // src/components/backpacks.ts
+  var backpackComponent = () => {
+    const backpackElements = [...document.querySelectorAll(".shop-backpacks_item")];
+    init4();
+    for (const i in backpackElements) {
+      const curElement = backpackElements[i];
+      const mainMedia = curElement.querySelector(".backpacks-item_main-image");
+      const featureMedia = [...curElement.querySelectorAll(".backpacks-item_image")];
+      const featureToggles = [...curElement.querySelectorAll(".backpacks-item_features-link")];
+      toggle360(curElement);
+      let storeCurrent = 0;
+      let firstClick = true;
+      for (let j = 0; j < featureToggles.length; j++) {
+        const curToggle = featureToggles[j];
+        curToggle.addEventListener("click", (e2) => {
+          if (firstClick) {
+            gsapWithCSS.to(mainMedia, { zIndex: 0 });
+          }
+          const currentImage = featureMedia[storeCurrent];
+          const curToggle2 = featureToggles[storeCurrent];
+          const nextImage = featureMedia[j];
+          const nextToggle = featureToggles[j];
+          if (storeCurrent === j) {
+            if (storeCurrent === 0 && j === 0) {
+              console.log("show first");
+              gsapWithCSS.to(currentImage, { zIndex: 1 });
+              gsapWithCSS.to(curToggle2, {
+                borderColor: "#C8102E",
+                backgroundColor: "#f6f4ee",
+                ease: "power1.out"
+              });
+            }
+          } else if (storeCurrent !== j) {
+            const tl = gsapWithCSS.timeline();
+            tl.to(nextImage, { zIndex: 1 });
+            tl.to(currentImage, { zIndex: 0 }, "<");
+            tl.to(
+              nextToggle,
+              {
+                borderColor: "#C8102E",
+                backgroundColor: "#f6f4ee",
+                ease: "power1.out"
+              },
+              "<"
+            );
+            tl.to(
+              curToggle2,
+              {
+                borderColor: "rgba(9, 11, 26, 0.3)",
+                backgroundColor: "transparent",
+                ease: "power1.out"
+              },
+              "<"
+            );
+            firstClick = false;
+            storeCurrent = j;
+          }
+        });
+      }
+    }
+    function init4() {
+      const featureMedia = [...document.querySelectorAll(".backpacks-item_image")];
+      gsapWithCSS.set(featureMedia, { zIndex: 0 });
+    }
+    function toggle360(parent) {
+      const toggleButton = parent.querySelector(".backpacks-item_360");
+      const toggleOpen = toggleButton.children[0];
+      const toggleClose = toggleButton.children[1];
+      const hideContent = parent.querySelector(".backpacks-items_media-wrap");
+      let isOpen = false;
+      toggleButton.addEventListener("click", () => {
+        isOpen = !isOpen;
+        if (isOpen === true) {
+          const tl = gsapWithCSS.timeline();
+          tl.to(hideContent, { opacity: 0, pointerEvents: "none" });
+          tl.to(toggleOpen, { opacity: 0 }, "<");
+          tl.set(toggleOpen, { display: "none" });
+          tl.set(toggleClose, { display: "block" });
+          tl.set(toggleButton, { padding: "1.2rem" });
+          tl.to(toggleClose, { opacity: 1 });
+        } else {
+          const tl = gsapWithCSS.timeline();
+          tl.to(hideContent, { opacity: 1, pointerEvents: "auto" });
+          tl.to(toggleClose, { opacity: 0 }, "<");
+          tl.set(toggleClose, { display: "none" });
+          tl.set(toggleOpen, { display: "block" });
+          tl.set(toggleButton, { padding: "0.5rem" });
+          tl.to(toggleOpen, { opacity: 1 });
+        }
+      });
+    }
+  };
+
   // src/components/mobileNav.ts
   var mobileNav = () => {
     const navParent = document.querySelector(".nav_component");
@@ -6659,6 +6752,38 @@
         ease: "none"
       }
     );
+    const impactSlider = document.querySelector(".impact-media_list");
+    const sliderWidth = impactSlider.getBoundingClientRect();
+    init4();
+    console.log("here", impactSlider, window.innerWidth, sliderWidth);
+    window.addEventListener("resize", () => {
+      init4();
+    });
+    function init4() {
+      const impactSlider2 = document.querySelector(".impact-media_list");
+      const iChildren = [...impactSlider2.children];
+      let trackWidth = 0;
+      iChildren.forEach((e2) => {
+        trackWidth += e2.clientWidth;
+      });
+      const dur = 5;
+      const tl = gsapWithCSS.to(impactSlider2, {
+        duration: dur,
+        x: -trackWidth,
+        onReverseComplete() {
+          this.totalTime(dur * 100);
+        },
+        repeat: -1,
+        ease: "none"
+      });
+      const clamp3 = gsapWithCSS.utils.clamp(-5, 5);
+      ScrollTrigger2.create({
+        onUpdate: (self) => {
+          tl.timeScale(clamp3(self.getVelocity() / 100));
+          gsapWithCSS.to(tl, { timeScale: 1, duration: 1, overwrite: true, ease: "none" });
+        }
+      });
+    }
   };
 
   // src/utils/enviornmentCheck.ts
@@ -7015,6 +7140,7 @@
       bannerMotion();
       bookMotion();
       interactiveMotion();
+      backpackComponent();
       storeMotion();
       aboutMotion();
       impactMotion();
