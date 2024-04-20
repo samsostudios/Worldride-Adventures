@@ -248,7 +248,7 @@ export const impactMotion = () => {
     const impactSlider = document.querySelector('.impact-media_list') as HTMLElement;
     const viewWidth = impactSlider.getBoundingClientRect().width;
 
-    const dur = 5;
+    const dur = 35;
     tl.to(impactSlider, {
       duration: dur,
       x: -viewWidth + window.innerWidth - 32,
