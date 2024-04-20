@@ -240,7 +240,9 @@ export const impactMotion = () => {
   );
 
   const tl = gsap.timeline({ repeat: -1 });
-  init();
+  setTimeout(() => {
+    init();
+  }, 2000);
 
   window.addEventListener('resize', () => {
     tl.pause();
