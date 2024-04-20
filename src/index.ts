@@ -9,6 +9,7 @@ import {
   interactiveMotion,
   storeMotion,
 } from '$motion/home';
+import { preloaderMotion } from '$motion/preloader';
 import { enviornmentCheck } from '$utils/enviornmentCheck';
 import { getDevice } from '$utils/getDevice';
 import { smoothScroll } from '$utils/smoothScroll';
@@ -32,6 +33,7 @@ window.Webflow.push(() => {
   if (windowLocation === '/') {
     // ----------
     // Motion
+    preloaderMotion();
     heroMotion();
     bannerMotion();
     bookMotion();
@@ -40,11 +42,5 @@ window.Webflow.push(() => {
     storeMotion();
     aboutMotion();
     impactMotion();
-  } else if (windowLocation.includes('checkout') || windowLocation.includes('confirmation')) {
-    // const lenis = smoothScroll();
-    // lenis.stop();
-    // setTimeout(() => {
-    //   lenis.start();
-    // }, 200);
   }
 });

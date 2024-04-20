@@ -16,26 +16,20 @@ export const backpackComponent = () => {
     let storeCurrent = 0;
     let firstClick = true;
 
-    // console.log(featureToggles);
-
     for (let j = 0; j < featureToggles.length; j++) {
       const curToggle = featureToggles[j] as HTMLElement;
-      curToggle.addEventListener('click', (e) => {
+      curToggle.addEventListener('click', () => {
         if (firstClick) {
-          //   console.log('first click');
           gsap.to(mainMedia, { zIndex: 0 });
         }
 
-        // console.log('current', storeCurrent, 'next', j);
         const currentImage = featureMedia[storeCurrent];
         const curToggle = featureToggles[storeCurrent];
         const nextImage = featureMedia[j];
         const nextToggle = featureToggles[j];
 
-        // console.log('cur', currentImage, 'next', nextImage);
         if (storeCurrent === j) {
           if (storeCurrent === 0 && j === 0) {
-            console.log('show first');
             gsap.to(currentImage, { zIndex: 1 });
             gsap.to(curToggle, {
               borderColor: '#C8102E',
@@ -44,7 +38,6 @@ export const backpackComponent = () => {
             });
           }
         } else if (storeCurrent !== j) {
-          //   console.log('regular next');
           const tl = gsap.timeline();
           tl.to(nextImage, { zIndex: 1 });
           tl.to(currentImage, { zIndex: 0 }, '<');
@@ -72,7 +65,6 @@ export const backpackComponent = () => {
         }
       });
     }
-    // console.log(featureToggles, featureMedia);
   }
 
   function init() {
@@ -89,7 +81,6 @@ export const backpackComponent = () => {
     let isOpen = false;
 
     toggleButton.addEventListener('click', () => {
-      //   console.log('show 360');
       isOpen = !isOpen;
 
       if (isOpen === true) {
@@ -111,5 +102,4 @@ export const backpackComponent = () => {
       }
     });
   }
-  //   console.log(backpackElements);
 };
