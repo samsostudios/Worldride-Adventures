@@ -244,21 +244,16 @@ export const impactMotion = () => {
     init();
   }, 2000);
 
-  window.addEventListener('resize', () => {
-    tl.pause();
-    init();
-    tl.restart();
-  });
-
   function init() {
     const impactSlider = document.querySelector('.impact-media_list') as HTMLElement;
-    const iChildren = [...impactSlider.children];
+    const viewWidth = impactSlider.getBoundingClientRect().width;
 
-    const last = iChildren[iChildren.length - 1] as HTMLElement;
-    const lastPos = last.getBoundingClientRect().right - impactSlider.getBoundingClientRect().width;
-
-    const dur = 30;
-    tl.to(impactSlider, { duration: dur, x: -lastPos, ease: 'linear' });
-    tl.to(impactSlider, { duration: dur, x: 0, ease: 'linear' });
+    const dur = 5;
+    tl.to(impactSlider, {
+      duration: dur,
+      x: -viewWidth + window.innerWidth - 32,
+      ease: 'linear',
+    });
+    tl.to(impactSlider, { duration: dur, x: 32, ease: 'linear' });
   }
 };

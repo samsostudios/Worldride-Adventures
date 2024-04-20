@@ -7,12 +7,11 @@ export const preloaderMotion = () => {
 
   const animation = gsap.timeline();
   animation.set(lenisContainer, { height: '100%' });
-  animation.set(preloaderElement, { display: 'flex', opacity: 1 });
-  animation.from(preloaderImage, {
-    delay: 0.4,
+  animation.to(preloaderImage, {
+    delay: 0.2,
     duration: 1,
-    y: '2rem',
-    opacity: 0,
+    y: '0rem',
+    opacity: 1,
     ease: 'power4.inOut',
   });
   animation.to(preloaderImage, {
