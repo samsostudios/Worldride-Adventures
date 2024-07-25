@@ -1,4 +1,5 @@
 import { backpackComponent } from '$components/backpacks';
+import { mediaSlider } from '$components/mediaSlider';
 import { mobileNav } from '$components/mobileNav';
 import {
   aboutMotion,
@@ -43,4 +44,6 @@ window.Webflow.push(() => {
     aboutMotion();
     impactMotion();
   }
+
+  mediaSlider();
 });
