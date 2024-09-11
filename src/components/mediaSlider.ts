@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 export const mediaSlider = () => {
   class TestimonialSlider {
     private tItems: HTMLElement[];
+    private indicators: HTMLElement[] = [];
     private currentIndex: number;
     private autoRotateInterval: number;
     private intervalId: number | undefined;
@@ -28,6 +29,9 @@ export const mediaSlider = () => {
 
       const tParent = document.querySelector('.impact_testimonials') as HTMLElement;
       const tWrapper = tParent.querySelector('.testimonials_wrapper');
+      this.indicators = [...document.querySelectorAll('.indicator_item')] as HTMLElement[];
+
+      this.indicators[0].classList.add('is-active');
 
       // const prevButton = document.querySelector(
       //   '.testimonials_control.is-next'
@@ -57,7 +61,16 @@ export const mediaSlider = () => {
 
           // Fade in the current testimonial
           gsap.to(this.tItems[this.currentIndex], { opacity: 1, duration: 0.5 });
+
+          this.updateIndicators();
         },
+      });
+    }
+
+    private updateIndicators() {
+      // Remove 'is-active' class from all indicators
+      this.indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('is-active', index === this.currentIndex);
       });
     }
 
