@@ -43,7 +43,7 @@ export const mediaSlider = () => {
 
       // new TestimonialSlider(tItems, prevButton, nextButton);
 
-      gsap.set(tWrapper, { height: '30vh' });
+      gsap.set(tWrapper, { height: '38vh' });
       this.tItems.forEach((item) => gsap.set(item, { position: 'absolute' }));
 
       this.setAutoRotate();
