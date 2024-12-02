@@ -54,12 +54,10 @@ export const mediaSlider = () => {
         opacity: 0,
         duration: 0.5,
         onComplete: () => {
-          // After fade out, set display to none to prevent interaction
           this.tItems.forEach((item, index) => {
             item.style.display = index === this.currentIndex ? 'block' : 'none';
           });
 
-          // Fade in the current testimonial
           gsap.to(this.tItems[this.currentIndex], { opacity: 1, duration: 0.5 });
 
           this.updateIndicators();
@@ -68,7 +66,6 @@ export const mediaSlider = () => {
     }
 
     private updateIndicators() {
-      // Remove 'is-active' class from all indicators
       this.indicators.forEach((indicator, index) => {
         indicator.classList.toggle('is-active', index === this.currentIndex);
       });

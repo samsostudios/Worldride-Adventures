@@ -6,7 +6,7 @@ window.Webflow.push(() => {
     const element = document.querySelector(selector);
     if (element) {
       importModule().then((module) => {
-        module.default(); // Assuming the module has a default export
+        module.default();
       });
     }
   }
