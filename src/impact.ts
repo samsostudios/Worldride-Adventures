@@ -12,4 +12,5 @@ window.Webflow.push(() => {
   }
 
   initComponent('.hero_compoent', () => import('$components/bgSlider'));
+  initComponent('.section_modal', () => import('$components/modal'));
 });
